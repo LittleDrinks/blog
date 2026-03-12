@@ -3,6 +3,6 @@ title:
 description:
 tags:
 aliases:
-date:
+date: <% tp.date.now("YYYY-MM-DDTHH:mm:ss") %>
 publish: false
 ---
