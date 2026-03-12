@@ -1,10 +1,8 @@
 ---
 title:
 description:
-permalink:
 tags:
-draft:
-date:
 aliases:
-publish:
+date:
+publish: false
 ---
