@@ -14,11 +14,11 @@ $$
 (-1)^s \times M \times 2^E
 $$
 
-![alt text](附件/IEEE_structure.png)
+![alt text](IEEE_structure.png)
 
 分几类数表示：
 
-![alt text](附件/IEEE_type.png)
+![alt text](IEEE_type.png)
 
 1. 规格化数字：$0<exp<255$
 	1. 尾数 $M=\text{1.frac}$，23 位尾数部分仅存储小数点后
@@ -35,9 +35,9 @@ $$
 
 如果把 float 看成一个无符号整数，每次对这个无符号整数 $+1$，相当于对这个数字 $+2^{E}$。
 
-![alt text](附件/IEEE_distribution.png)
+![alt text](IEEE_distribution.png)
 
-![alt text](附件/IEEE_distribution_2.png)
+![alt text](IEEE_distribution_2.png)
 
 
 尾数部分 $M$ 的进位，和整数部分自带的 $1$ 相加变成了 $(10)_2$，此时需要把小数点左移一位，相当于产生了一个会加到指数部分的 $1$。
@@ -50,5 +50,5 @@ IEEE 采取了【向最近偶数取整】的策略，当某个数恰好是中间
 
 此时统计学意义上，每个数都有 50% 的概率向上或向下取整，不会影响平均数。
 
-![alt text](附件/IEEE_round_example.png)
+![alt text](IEEE_round_example.png)
 
