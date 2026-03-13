@@ -1,9 +1,10 @@
 ---
-title: 第38次CSP认证游记
+title: "第38次CSP认证游记"
 description: ""
 tags:
   - 游记
-aliases: []
+aliases:
+  []
 date: 2025-06-08T23:03:00
 publish: true
 ---

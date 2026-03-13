@@ -1,7 +1,7 @@
 // archive-fixed.js - Quartz 4 归档脚本（修正版）
 async function archiveToQuartz() {
     // ==================== 配置区 ====================
-    const targetFolder = "杂物/游记";              
+    const targetFolder = "CS";              
     const keepTags = true;                 // true保留原tags, false清空
     const dateFormat = "YYYY-MM-DDTHH:mm:ss";
     const desiredOrder = ['title', 'description', 'tags', 'aliases', 'date', 'publish'];
