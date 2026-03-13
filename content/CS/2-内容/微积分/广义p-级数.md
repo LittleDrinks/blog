@@ -2,7 +2,7 @@
 title: "广义p-级数"
 description: ""
 tags:
-  - 数学
+  []
 aliases:
   []
 date: 2026-03-13T20:06:03
