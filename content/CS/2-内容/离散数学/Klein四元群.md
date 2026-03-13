@@ -5,7 +5,7 @@ tags:
   []
 aliases:
   []
-date: 2026-01-13T22:22:45
+date: 2026-03-13T19:54:53
 publish: true
 ---
 $G=\{e,a,b,c\}$
