@@ -16,7 +16,7 @@ $n$ 个节点的二叉树有多少种形态
 > [!success] 推导
 > $$C(n)=\sum_{k=0}^{n-1}C(k)C(n-1-k)$$
 > 
-> 构造[[生成函数|母函数]] $F(x)=\displaystyle\sum_{k=0}^{\infty}C(k)x^k$
+> 构造[[CS/2-内容/组合数学/生成函数|母函数]] $F(x)=\displaystyle\sum_{k=0}^{\infty}C(k)x^k$
 > $F(x)\times F(x)=C_0C_0+(C_0C_1+C_1C_0)x+(C_0C_3+C_1C_2+C_2C_1+C_3C_0)x^2=\displaystyle\sum_{k=1}^{\infty}C_kx^{k+1}$
 > 则 $xF^2(x)+C_0=F(x)$，其中 $C_0=1$
 > 解得 $F(x)=\dfrac{1\pm\sqrt{1-4x}}{2x}=\dfrac{1}{2x}\pm\dfrac{1}{2x}(1-4x)^{\frac{1}{2}}$ 

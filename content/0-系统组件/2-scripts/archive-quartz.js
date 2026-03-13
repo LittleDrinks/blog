@@ -1,7 +1,7 @@
 // archive-v2.js - 优先使用 cdate 作为备选
 async function archiveToQuartz() {
-    const targetFolder = "CS/2-内容";              
-    const keepTags = false;                 
+    const targetFolder = "OI";              
+    const keepTags = true;                 
     const dateFormat = "YYYY-MM-DDTHH:mm:ss";
     const desiredOrder = ['title', 'description', 'tags', 'aliases', 'date', 'publish'];
     const fieldTypes = {
