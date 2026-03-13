@@ -1,11 +1,13 @@
 ---
-tags:
-  - 数学
-aliases:
 title: Catalen数
-date: 2025-12-16T22:37:35
+description:
+  []
+tags:
+  []
+aliases:
+  []
+date: "2025-12-16T22:37:35"
 publish: true
-description: ""
 ---
 $n$ 个节点的二叉树有多少种形态
 出栈序列

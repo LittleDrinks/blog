@@ -1,11 +1,13 @@
 ---
-tags:
-  - 数学
-aliases:
 title: polya定理
-date: 2026-01-09T20:25:32
+description:
+  []
+tags:
+  []
+aliases:
+  []
+date: "2026-01-09T20:25:32"
 publish: true
-description: ""
 ---
 $m$ 着色问题，对于 [[Burnside引理]]，我们希望进一步简化 $\sum\mathrm{Fix}(g)$。
 将置换 $p_j$ 写成[[共轭类]]的形式 $(1)^{c_1}(2)^{c_2}\ldots (n)^{c_n}$，不难发现一个循环内只有颜色完全相同，才会成为不动点

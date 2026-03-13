@@ -1,10 +1,13 @@
 ---
-tags:
-aliases:
 title: Jordan公式
-date: 2025-12-30T20:30:15
+description:
+  []
+tags:
+  []
+aliases:
+  []
+date: "2025-12-30T20:30:15"
 publish: true
-description: ""
 ---
 一共 $n$ 条性质，求恰好满足 $m$ 条性质的数量
 记 $\alpha(m)$ 表示至少满足 $m$ 条性质的元素个数

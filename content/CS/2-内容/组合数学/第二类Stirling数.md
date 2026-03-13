@@ -1,11 +1,13 @@
 ---
-tags:
-  - 数学
-aliases:
 title: 第二类Stirling数
-date: 2025-12-16T22:37:35
+description:
+  []
+tags:
+  []
+aliases:
+  []
+date: "2025-12-16T22:37:35"
 publish: true
-description: ""
 ---
 $s(n,k)$ 表示把 $n$ 个元素分为 $k$ 组（组内顺序无关）的方案数
 无特殊声明，$s(n,k)$ 指[[第二类Stirling数]]而非第一类

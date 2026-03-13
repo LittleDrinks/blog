@@ -1,10 +1,13 @@
 ---
-tags:
-aliases:
 title: Klein四元群
-date: 2026-01-13T22:22:45
+description:
+  []
+tags:
+  []
+aliases:
+  []
+date: "2026-01-13T22:22:45"
 publish: true
-description: ""
 ---
 $G=\{e,a,b,c\}$
 $e$ 是单位元

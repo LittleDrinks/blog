@@ -1,11 +1,13 @@
 ---
-tags:
-  - 数学
-aliases:
 title: 第一类Stirling数
-date: 2025-12-16T22:37:35
+description:
+  []
+tags:
+  []
+aliases:
+  []
+date: "2025-12-16T22:37:35"
 publish: true
-description: ""
 ---
 $s(n,k)$ 表示 $n$ 个元素分为 $k$ 个圆排列的方案数
 

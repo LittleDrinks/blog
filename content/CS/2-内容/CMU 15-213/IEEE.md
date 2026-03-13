@@ -1,9 +1,11 @@
 ---
 title: 【CMU15213杂记】IEEE 754
-description:
+description: []
 tags:
+  []
 aliases:
-date: 2026-03-13T00:10:38
+  []
+date: "2026-03-13T00:10:02"
 publish: true
 ---
 # 定义方式

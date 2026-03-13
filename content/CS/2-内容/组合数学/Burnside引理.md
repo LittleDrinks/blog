@@ -1,11 +1,13 @@
 ---
-tags:
-  - 数学
-aliases:
 title: Burnside引理
-date: 2026-01-15T10:59:19
+description:
+  []
+tags:
+  []
+aliases:
+  []
+date: "2026-01-15T10:59:19"
 publish: true
-description: ""
 ---
 前置：[[共轭类]]
 
