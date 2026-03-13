@@ -2,7 +2,7 @@
 title: "AT_abc413_f"
 description: ""
 tags:
-  - 题解
+  - OI/题解
 aliases:
   - No Passage
 date: 2025-08-06T23:08:15

@@ -2,8 +2,8 @@
 title: "AT_abc418_d"
 description: ""
 tags:
-  - 题解
-  - DP
+  - OI/题解
+  - OI/DP
 aliases:
   - XNOR Operation
 date: 2025-08-13T13:07:21

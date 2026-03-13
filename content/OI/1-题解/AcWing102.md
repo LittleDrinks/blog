@@ -2,8 +2,8 @@
 title: "AcWing102"
 description: ""
 tags:
-  - 题解
-  - 二分
+  - OI/题解
+  - OI/二分
 aliases:
   - AcWing102. 最佳牛围栏
   - 最佳牛围栏

@@ -2,9 +2,9 @@
 title: "CF11D"
 description: ""
 tags:
-  - 题解
-  - DP
-  - DP/状压DP
+  - OI/题解
+  - OI/DP
+  - OI/DP/状压DP
 aliases:
   []
 date: 2025-03-26T08:17:09

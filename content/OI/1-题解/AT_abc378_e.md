@@ -2,10 +2,10 @@
 title: "AT_abc378_e"
 description: ""
 tags:
-  - 题解
-  - 前缀和
-  - 逆序对
-  - 树状数组
+  - OI/题解
+  - OI/前缀和
+  - OI/逆序对
+  - OI/树状数组
 aliases:
   []
 date: 2025-02-11T08:29:59

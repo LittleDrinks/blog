@@ -2,7 +2,7 @@
 title: "AT_abc379_e"
 description: ""
 tags:
-  - 题解
+  - OI/题解
 aliases:
   []
 date: 2025-02-11T08:29:59

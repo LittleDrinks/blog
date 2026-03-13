@@ -2,8 +2,8 @@
 title: "AcWing257"
 description: ""
 tags:
-  - 题解
-  - 二分图/二分图匹配
+  - OI/题解
+  - OI/二分图/二分图匹配
 aliases:
   - 关押罪犯
   - AcWing257. 关押罪犯

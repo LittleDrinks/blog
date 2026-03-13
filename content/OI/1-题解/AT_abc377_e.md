@@ -2,7 +2,7 @@
 title: "AT_abc377_e"
 description: ""
 tags:
-  - 题解
+  - OI/题解
 aliases:
   - "[ABC377E] Permute K times 2"
 date: 2025-02-11T08:29:59

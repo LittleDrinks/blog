@@ -2,8 +2,8 @@
 title: "AT_abc419_e"
 description: ""
 tags:
-  - 题解
-  - DP
+  - OI/题解
+  - OI/DP
 aliases:
   - Subarray Sum Divisibility
 date: 2025-08-17T13:02:47

@@ -2,8 +2,8 @@
 title: "AT_abc397_f"
 description: ""
 tags:
-  - 题解
-  - 线段树
+  - OI/题解
+  - OI/线段树
 aliases:
   []
 date: 2025-03-16T17:46:47

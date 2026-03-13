@@ -2,8 +2,8 @@
 title: "AT_abc318_g"
 description: ""
 tags:
-  - 题解
-  - 网络流/最大流
+  - OI/题解
+  - OI/网络流/最大流
 aliases:
   - Typical Path Problem
 date: 2025-11-06T13:29:12

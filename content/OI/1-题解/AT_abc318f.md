@@ -2,8 +2,8 @@
 title: "AT_abc318f"
 description: ""
 tags:
-  - 题解
-  - 贪心
+  - OI/题解
+  - OI/贪心
 aliases:
   - Octopus
 date: 2025-11-05T22:05:28

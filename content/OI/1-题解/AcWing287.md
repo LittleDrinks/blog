@@ -2,10 +2,10 @@
 title: "AcWing287"
 description: ""
 tags:
-  - 题解
-  - DP
-  - DP/树形DP
-  - DP/树形DP/二次扫描
+  - OI/题解
+  - OI/DP
+  - OI/DP/树形DP
+  - OI/DP/树形DP/二次扫描
 aliases:
   - AcWing287. 积蓄程度
 date: 2025-02-11T08:29:59

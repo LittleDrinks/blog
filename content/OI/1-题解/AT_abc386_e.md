@@ -2,8 +2,8 @@
 title: "AT_abc386_e"
 description: ""
 tags:
-  - 题解
-  - 搜索
+  - OI/题解
+  - OI/搜索
 aliases:
   []
 date: 2025-02-11T08:29:59

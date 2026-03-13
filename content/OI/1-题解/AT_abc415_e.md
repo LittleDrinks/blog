@@ -2,8 +2,8 @@
 title: "AT_abc415_e"
 description: ""
 tags:
-  - 题解
-  - DP
+  - OI/题解
+  - OI/DP
 aliases:
   - Hungry Takahashi
 date: 2025-07-31T22:34:28

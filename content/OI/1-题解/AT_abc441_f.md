@@ -2,8 +2,8 @@
 title: "AT_abc441_f"
 description: ""
 tags:
-  - 题解
-  - DP/背包/退背包
+  - OI/题解
+  - OI/DP/背包/退背包
 aliases:
   - Must Buy
 date: 2026-01-20T21:29:16

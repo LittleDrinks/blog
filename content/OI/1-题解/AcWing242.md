@@ -2,8 +2,8 @@
 title: "AcWing242"
 description: ""
 tags:
-  - 题解
-  - 树状数组
+  - OI/题解
+  - OI/树状数组
 aliases:
   - AcWing 242. 一个简单的整数问题
   - 一个简单的整数问题

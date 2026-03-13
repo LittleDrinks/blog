@@ -2,8 +2,8 @@
 title: "AT_abc438_e"
 description: ""
 tags:
-  - 题解
-  - 倍增
+  - OI/题解
+  - OI/倍增
 aliases:
   - Heavy Buckets
 date: 2025-12-27T22:39:30

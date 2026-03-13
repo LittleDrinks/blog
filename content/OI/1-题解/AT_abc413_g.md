@@ -2,8 +2,8 @@
 title: "AT_abc413_g"
 description: ""
 tags:
-  - 题解
-  - 并查集
+  - OI/题解
+  - OI/并查集
 aliases:
   - Big Banned Grid
 date: 2025-08-06T23:09:35

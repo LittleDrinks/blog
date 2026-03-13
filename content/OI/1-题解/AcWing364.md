@@ -2,9 +2,9 @@
 title: "AcWing364"
 description: ""
 tags:
-  - 题解
-  - tarjan/桥
-  - tarjan/EBCC
+  - OI/题解
+  - OI/tarjan/桥
+  - OI/tarjan/EBCC
 aliases:
   - Network
 date: 2025-07-06T20:57:13

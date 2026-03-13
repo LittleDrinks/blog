@@ -2,8 +2,8 @@
 title: "AT_abc414_e"
 description: ""
 tags:
-  - 题解
-  - 数论分块
+  - OI/题解
+  - OI/数论分块
 aliases:
   - Count A%B=C
 date: 2025-08-02T13:51:52

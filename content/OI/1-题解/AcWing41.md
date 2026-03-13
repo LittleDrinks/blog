@@ -2,9 +2,9 @@
 title: "AcWing41"
 description: ""
 tags:
-  - 题解
-  - 栈
-  - 栈/单调栈
+  - OI/题解
+  - OI/栈
+  - OI/栈/单调栈
 aliases:
   - AcWing41. 包含min函数的栈
   - 包含min函数的栈

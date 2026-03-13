@@ -2,8 +2,8 @@
 title: "AT_abc381_d"
 description: ""
 tags:
-  - 题解
-  - 滑动窗口
+  - OI/题解
+  - OI/滑动窗口
 aliases:
   - "[ABC381D] 1122 Substring"
 date: 2025-02-11T08:29:59

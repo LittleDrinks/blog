@@ -2,7 +2,7 @@
 title: "AT_abc377_d"
 description: ""
 tags:
-  - 题解
+  - OI/题解
 aliases:
   - "[ABC377D] Many Segments 2"
 date: 2025-02-11T08:29:59

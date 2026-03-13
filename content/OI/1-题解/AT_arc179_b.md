@@ -2,9 +2,9 @@
 title: "AT_arc179_b"
 description: ""
 tags:
-  - 题解
-  - DP
-  - DP/状压DP
+  - OI/题解
+  - OI/DP
+  - OI/DP/状压DP
 aliases:
   - "[ARC179B] Between B and B"
 date: 2025-02-11T08:29:59

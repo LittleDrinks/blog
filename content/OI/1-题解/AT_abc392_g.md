@@ -2,8 +2,8 @@
 title: "AT_abc392_g"
 description: ""
 tags:
-  - 题解
-  - 卷积
+  - OI/题解
+  - OI/卷积
 aliases:
   - Fine Triplets
 date: 2025-08-03T01:29:04

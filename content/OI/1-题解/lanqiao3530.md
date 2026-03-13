@@ -2,9 +2,9 @@
 title: "lanqiao3530"
 description: ""
 tags:
-  - 题解
-  - 数学
-  - 生成函数
+  - OI/题解
+  - OI/数学
+  - OI/生成函数
 aliases:
   - 高塔
 date: 2025-03-14T21:11:20

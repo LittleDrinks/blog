@@ -2,7 +2,7 @@
 title: "AT_abc413_e"
 description: ""
 tags:
-  - 题解
+  - OI/题解
 aliases:
   - Reverse 2^i
 date: 2025-08-06T21:23:08

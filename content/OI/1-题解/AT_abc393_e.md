@@ -2,8 +2,8 @@
 title: "AT_abc393_e"
 description: ""
 tags:
-  - 题解
-  - 数论/因数
+  - OI/题解
+  - OI/数学/数论/因数
 aliases:
   []
 date: 2025-02-15T21:15:39

@@ -2,8 +2,8 @@
 title: "AT_abc388_d"
 description: ""
 tags:
-  - 题解
-  - 树状数组
+  - OI/题解
+  - OI/树状数组
 aliases:
   []
 date: 2025-02-11T08:29:59

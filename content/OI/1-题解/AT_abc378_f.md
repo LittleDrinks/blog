@@ -2,8 +2,8 @@
 title: "AT_abc378_f"
 description: ""
 tags:
-  - 题解
-  - 并查集
+  - OI/题解
+  - OI/并查集
 aliases:
   []
 date: 2025-02-11T08:29:59

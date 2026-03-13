@@ -2,9 +2,9 @@
 title: "AT_arc052_d"
 description: ""
 tags:
-  - 题解
-  - 根号分治
-  - DP/数位DP
+  - OI/题解
+  - OI/根号分治
+  - OI/DP/数位DP
 aliases:
   - "[ARC052D] 9"
 date: 2025-02-11T08:29:59

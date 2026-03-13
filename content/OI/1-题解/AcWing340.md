@@ -2,9 +2,9 @@
 title: "AcWing340"
 description: ""
 tags:
-  - 题解
-  - 最短路
-  - 二分
+  - OI/题解
+  - OI/最短路
+  - OI/二分
 aliases:
   - 通信线路
 date: 2025-06-01T20:37:39

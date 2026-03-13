@@ -2,8 +2,8 @@
 title: "AT_abc392_f"
 description: ""
 tags:
-  - 题解
-  - 树状数组
+  - OI/题解
+  - OI/树状数组
 aliases:
   []
 date: 2025-02-15T22:13:28

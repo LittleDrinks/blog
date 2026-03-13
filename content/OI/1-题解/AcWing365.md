@@ -2,9 +2,9 @@
 title: "AcWing365"
 description: ""
 tags:
-  - 题解
-  - tarjan/PBCC
-  - 二分图/二分图染色
+  - OI/题解
+  - OI/tarjan/PBCC
+  - OI/二分图/二分图染色
 aliases:
   []
 date: 2025-07-06T22:10:46

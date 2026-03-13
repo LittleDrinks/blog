@@ -2,8 +2,8 @@
 title: "AcWing363"
 description: ""
 tags:
-  - 题解
-  - tarjan/割点
+  - OI/题解
+  - OI/tarjan/割点
 aliases:
   - B城
 date: 2025-07-06T19:54:04

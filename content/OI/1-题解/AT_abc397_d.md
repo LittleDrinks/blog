@@ -2,8 +2,8 @@
 title: "AT_abc397_d"
 description: ""
 tags:
-  - 题解
-  - 数学
+  - OI/题解
+  - OI/数学
 aliases:
   []
 date: 2025-03-15T22:44:27

@@ -2,9 +2,9 @@
 title: "AcWing343"
 description: ""
 tags:
-  - 题解
-  - 最短路/传递闭包
-  - 最短路
+  - OI/题解
+  - OI/最短路/传递闭包
+  - OI/最短路
 aliases:
   []
 date: 2025-06-01T22:06:33

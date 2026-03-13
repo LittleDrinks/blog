@@ -2,10 +2,10 @@
 title: "AT_abc391_g"
 description: ""
 tags:
-  - 题解
-  - DP/DP套DP
-  - DP
-  - DP/状压DP
+  - OI/题解
+  - OI/DP/DP套DP
+  - OI/DP
+  - OI/DP/状压DP
 aliases:
   []
 date: 2025-02-11T08:29:59

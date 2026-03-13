@@ -2,8 +2,8 @@
 title: "AT_abc441_c"
 description: ""
 tags:
-  - 题解
-  - 贪心
+  - OI/题解
+  - OI/贪心
 aliases:
   - Sake or Water
 date: 2026-01-20T20:07:55

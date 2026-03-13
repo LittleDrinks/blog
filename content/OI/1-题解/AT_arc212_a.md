@@ -2,7 +2,7 @@
 title: "AT_arc212_a"
 description: ""
 tags:
-  - 题解
+  - OI/题解
 aliases:
   []
 date: 2026-01-15T23:22:37

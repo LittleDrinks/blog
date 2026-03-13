@@ -2,8 +2,8 @@
 title: "AcWing341"
 description: ""
 tags:
-  - 题解
-  - 最短路
+  - OI/题解
+  - OI/最短路
 aliases:
   - 最优贸易
 date: 2025-06-01T20:51:20

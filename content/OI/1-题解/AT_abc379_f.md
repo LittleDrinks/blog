@@ -2,8 +2,8 @@
 title: "AT_abc379_f"
 description: ""
 tags:
-  - 题解
-  - 栈/单调栈
+  - OI/题解
+  - OI/栈/单调栈
 aliases:
   []
 date: 2025-02-11T08:29:59

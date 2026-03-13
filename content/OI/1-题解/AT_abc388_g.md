@@ -2,10 +2,10 @@
 title: "AT_abc388_g"
 description: ""
 tags:
-  - 题解
-  - ST表
-  - 贪心
-  - 二分
+  - OI/题解
+  - OI/ST表
+  - OI/贪心
+  - OI/二分
 aliases:
   []
 date: 2025-02-11T08:29:59
