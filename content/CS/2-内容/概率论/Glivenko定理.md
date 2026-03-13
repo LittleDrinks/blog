@@ -5,7 +5,7 @@ tags:
   []
 aliases:
   []
-date: 2026-03-13T20:06:02
+date: 2025-12-05T13:53:57
 publish: true
 ---
 当 $n\to\infty$ 时，$F_n(x)$ 以概率 $1$ 一致收敛于分布函数

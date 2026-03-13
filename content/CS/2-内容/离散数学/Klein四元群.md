@@ -5,8 +5,12 @@ tags:
   []
 aliases:
   []
-date: 2026-03-13T19:54:53
+date: 2026-03-13T19:56:49
 publish: true
+---
+---
+tags:
+aliases:
 ---
 $G=\{e,a,b,c\}$
 $e$ 是单位元

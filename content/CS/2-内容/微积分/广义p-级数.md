@@ -5,7 +5,7 @@ tags:
   []
 aliases:
   []
-date: 2026-03-13T20:06:03
+date: 2025-05-14T16:12:30
 publish: true
 ---
 $\displaystyle\sum_{n=1}^\infty\dfrac{1}{x^a\ln^b x}$

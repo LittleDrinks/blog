@@ -5,7 +5,7 @@ tags:
   []
 aliases:
   []
-date: 2026-03-13T20:06:02
+date: 2025-05-10T11:39:13
 publish: true
 ---
 $\displaystyle\sum_{n=1}^\infty\dfrac{1}{n^p}$ 在 $p\leq1$ 时发散，在 $p>1$ 时收敛
