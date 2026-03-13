@@ -1,23 +1,15 @@
 ---
-title: "AcWing106"
+title: AcWing106
 description: ""
 tags:
-  []
+  - OI/题解
+  - OI/堆
+  - OI/排序
+  - OI/堆/对顶堆
 aliases:
-  []
+  - 动态中位数
 date: 2025-02-11T08:29:59
 publish: true
----
----
-tags:
-  - 题解
-  - 堆
-  - 排序
-  - 堆/对顶堆
-aliases:
-  - AcWing106. 动态中位数
-  - 动态中位数
-speed:
 ---
 ## [106. 动态中位数](https://www.acwing.com/problem/content/108/)
 

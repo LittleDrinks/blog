@@ -1,21 +1,13 @@
 ---
-title: "AcWing107"
+title: AcWing107
 description: ""
 tags:
-  []
+  - OI/题解
+  - OI/逆序对
 aliases:
-  []
+  - 超快速排序
 date: 2025-02-11T08:29:59
 publish: true
----
----
-tags:
-  - 题解
-  - 逆序对
-aliases:
-  - AcWing107. 超快速排序
-  - 超快速排序
-speed:
 ---
 ## [107. 超快速排序](https://www.acwing.com/problem/content/109/)
 

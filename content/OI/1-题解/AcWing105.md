@@ -1,22 +1,14 @@
 ---
-title: "AcWing105"
+title: AcWing105
 description: ""
 tags:
-  []
+  - OI/题解
+  - OI/排序
+  - OI/贪心
 aliases:
-  []
+  - 七夕祭
 date: 2025-02-11T08:29:59
 publish: true
----
----
-tags:
-  - 题解
-  - 排序
-  - 贪心
-aliases:
-  - AcWing105. 七夕祭
-  - 七夕祭
-speed:
 ---
 ## [105. 七夕祭](https://www.acwing.com/problem/content/107/)
 

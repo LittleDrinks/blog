@@ -1,21 +1,14 @@
 ---
-title: "AcWing103"
+title: AcWing103
 description: ""
 tags:
-  []
-aliases:
-  []
-date: 2025-02-11T08:29:59
-publish: true
----
----
-tags:
-  - 题解
-  - 离散化
+  - OI/题解
+  - OI/离散化
 aliases:
   - AcWing103. 电影
   - 电影
-speed:
+date: 2025-02-11T08:29:59
+publish: true
 ---
 ## [103. 电影](https://www.acwing.com/problem/content/105/)
 
@@ -24,7 +17,7 @@ speed:
 - 去重时写 `len=unique(a+1, a+n+1)-(a+1)`
 - 二分时写 `lower(a+1, a+n+1, x)-a`
 
-#### [AC 代码](https://www.acwing.com/problem/content/submission/code_detail/36421747/)
+[***AC 代码***](https://www.acwing.com/problem/content/submission/code_detail/36421747/)
 
 ```cpp
 #include <bits/stdc++.h>
