@@ -2,6 +2,9 @@
 title: 主页
 description:
 tags:
+  - CS
+  - OI
+  - 游记
 aliases:
 date: 2026-03-13T00:16:05
 publish: true
