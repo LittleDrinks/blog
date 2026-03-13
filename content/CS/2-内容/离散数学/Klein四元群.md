@@ -1,12 +1,11 @@
 ---
-title: Klein四元群
-description:
-  []
+title: "Klein四元群"
+description: ""
 tags:
   []
 aliases:
   []
-date: "2026-01-13T22:22:45"
+date: 2026-01-13T22:22:45
 publish: true
 ---
 $G=\{e,a,b,c\}$

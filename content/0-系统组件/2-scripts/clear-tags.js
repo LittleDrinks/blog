@@ -1,9 +1,19 @@
-// archive-quartz.js - 批量归档老文件到 Quartz 4 格式（严格顺序控制）
+// archive-quartz-fixed.js - 强制类型控制版本
 async function archiveToQuartz() {
     // ==================== 配置区 ====================
-    const targetFolder = "CS";  // 修改为你的文件夹名
+    const targetFolder = "CS";
     const desiredOrder = ['title', 'description', 'tags', 'aliases', 'date', 'publish'];
     const dateFormat = "YYYY-MM-DDTHH:mm:ss";
+    
+    // 关键：显式定义每个字段的 YAML 类型
+    const fieldTypes = {
+        title: 'string',      // 强制字符串（加引号）
+        description: 'string',// 强制字符串（加引号，避免数字化）
+        tags: 'array',        // 强制数组
+        aliases: 'array',     // 强制数组  
+        date: 'datetime',     // 强制日期时间（无引号，ISO格式）
+        publish: 'boolean'    // 强制布尔值（true/false 无引号）
+    };
     // ================================================
     
     const files = app.vault.getMarkdownFiles()
@@ -14,11 +24,9 @@ async function archiveToQuartz() {
     
     for (const file of files) {
         try {
-            // 获取文件创建时间
             const stat = await app.vault.adapter.stat(file.path);
             const creationDate = moment(stat.ctime).format(dateFormat);
             
-            // 读取完整内容
             const content = await app.vault.read(file);
             
             // 分离 frontmatter 和正文
@@ -26,7 +34,7 @@ async function archiveToQuartz() {
             const body = fmMatch ? fmMatch[2] : content;
             const existingYaml = fmMatch ? fmMatch[1] : '';
             
-            // 解析现有 frontmatter（简单解析，保留已有值）
+            // 解析现有 frontmatter
             const fm = {};
             const lines = existingYaml.split('\n');
             let currentKey = null;
@@ -45,62 +53,61 @@ async function archiveToQuartz() {
                     currentKey = key;
                     
                     if (val === '') {
-                        fm[key] = []; // 假设为空数组开始
+                        fm[key] = [];
                     } else if (val === 'true') fm[key] = true;
                     else if (val === 'false') fm[key] = false;
-                    else if (!isNaN(val) && val !== '') fm[key] = Number(val);
                     else {
-                        // 去除引号
+                        // 保留原始字符串值（去除引号）
                         fm[key] = val.replace(/^["'](.*)["']$/, '$1');
                     }
                 }
             }
             
-            // 按 desiredOrder 构建新的 frontmatter 对象
-            const newFm = {};
+            // 构建新的 frontmatter（带类型安全）
+            const newFm = {
+                title: fm.title || file.basename,
+                description: "",
+                tags: [],  // 强制清空
+                aliases: Array.isArray(fm.aliases) ? fm.aliases : [],
+                date: creationDate,  // 已经是字符串格式
+                publish: true        // 强制布尔值
+            };
             
-            // title: 保留已有，无则用文件名
-            newFm.title = fm.title || file.basename;
-            
-            // description: 保留或空字符串
-            newFm.description = fm.description || "";
-            
-            // tags: 强制清空为空数组（你的需求）
-            newFm.tags = [];
-            
-            // aliases: 保留或空数组
-            newFm.aliases = Array.isArray(fm.aliases) ? fm.aliases : [];
-            
-            // date: 文件创建时间
-            newFm.date = creationDate;
-            
-            // publish: 强制 true
-            newFm.publish = true;
-            
-            // 构建 YAML 字符串（严格按顺序）
+            // 构建 YAML 字符串（严格按类型格式化）
             const yamlLines = ['---'];
             
             for (const key of desiredOrder) {
                 const value = newFm[key];
+                const type = fieldTypes[key] || 'string';
                 
-                if (Array.isArray(value)) {
-                    yamlLines.push(`${key}:`);
-                    if (value.length === 0) {
-                        yamlLines.push(`  []`);
-                    } else {
-                        for (const item of value) {
-                            yamlLines.push(`  - ${item}`);
+                switch(type) {
+                    case 'array':
+                        yamlLines.push(`${key}:`);
+                        if (value.length === 0) {
+                            yamlLines.push(`  []`);
+                        } else {
+                            for (const item of value) {
+                                yamlLines.push(`  - ${item}`);
+                            }
                         }
-                    }
-                } else if (typeof value === 'string') {
-                    // 如果包含特殊字符，加引号转义
-                    if (value.includes(':') || value.includes('"') || value.includes('#') || value.includes('\n')) {
-                        yamlLines.push(`${key}: "${value.replace(/"/g, '\\"')}"`);
-                    } else {
+                        break;
+                        
+                    case 'boolean':
+                        // 布尔值不加引号：true / false
                         yamlLines.push(`${key}: ${value}`);
-                    }
-                } else {
-                    yamlLines.push(`${key}: ${value}`);
+                        break;
+                        
+                    case 'datetime':
+                        // 日期时间不加引号，保持 ISO 格式
+                        yamlLines.push(`${key}: ${value}`);
+                        break;
+                        
+                    case 'string':
+                    default:
+                        // 字符串强制加双引号，防止被解析为数字/布尔值
+                        const strVal = String(value).replace(/"/g, '\\"');
+                        yamlLines.push(`${key}: "${strVal}"`);
+                        break;
                 }
             }
             
@@ -117,7 +124,7 @@ async function archiveToQuartz() {
         }
     }
     
-    new Notice(`✅ 已归档 ${processed} 个文件${errorCount > 0 ? ` | ❌ ${errorCount} 个失败` : ''}`, 6000);
+    new Notice(`✅ 已重建 ${processed} 个文件${errorCount > 0 ? ` | ❌ ${errorCount} 个失败` : ''}`, 6000);
 }
 
 // 执行

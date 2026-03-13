@@ -1,12 +1,11 @@
 ---
-title: Jordan公式
-description:
-  []
+title: "Jordan公式"
+description: ""
 tags:
   []
 aliases:
   []
-date: "2025-12-30T20:30:15"
+date: 2025-12-30T20:30:15
 publish: true
 ---
 一共 $n$ 条性质，求恰好满足 $m$ 条性质的数量

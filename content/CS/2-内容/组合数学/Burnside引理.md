@@ -1,12 +1,11 @@
 ---
-title: Burnside引理
-description:
-  []
+title: "Burnside引理"
+description: ""
 tags:
   []
 aliases:
   []
-date: "2026-01-15T10:59:19"
+date: 2026-01-15T10:59:19
 publish: true
 ---
 前置：[[共轭类]]

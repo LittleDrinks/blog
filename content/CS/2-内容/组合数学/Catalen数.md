@@ -1,12 +1,11 @@
 ---
-title: Catalen数
-description:
-  []
+title: "Catalen数"
+description: ""
 tags:
   []
 aliases:
   []
-date: "2025-12-16T22:37:35"
+date: 2025-12-16T22:37:35
 publish: true
 ---
 $n$ 个节点的二叉树有多少种形态

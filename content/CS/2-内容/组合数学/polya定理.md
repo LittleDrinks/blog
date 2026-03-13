@@ -1,12 +1,11 @@
 ---
-title: polya定理
-description:
-  []
+title: "polya定理"
+description: ""
 tags:
   []
 aliases:
   []
-date: "2026-01-09T20:25:32"
+date: 2026-01-09T20:25:32
 publish: true
 ---
 $m$ 着色问题，对于 [[Burnside引理]]，我们希望进一步简化 $\sum\mathrm{Fix}(g)$。
