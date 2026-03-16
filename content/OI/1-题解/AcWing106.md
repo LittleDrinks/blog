@@ -1,5 +1,5 @@
 ---
-title: AcWing106
+title: "AcWing106"
 description: ""
 tags:
   - OI/题解
