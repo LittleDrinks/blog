@@ -15,7 +15,7 @@ publish: true
 #小程序 ://闲鱼/2 LP 8 VqJ 8 wEhalKj
 点击链接直接打开
 ```
-直接在 vscode 中使用额度会有一些工具上的问题，比如 runSubagent 是没法用的。但是用它提供的 copilot hub 在 copilot cli 使用额度，就支持得就很好。
+直接在 vscode 中使用额度会有一些工具上的问题，比如 runSubagent 是没法用的。但是用它提供的 copilot hub 在 copilot cli 使用，一些 MCP 就支持得就很好。
 然后跟着 [【干货】免费白嫖一个月 GPT Plus！全流程订阅指南，细节拉满](https://www.bilibili.com/video/BV152NwztEPL/?share_source=copy_web) 花 7 块买了韩国的银行卡号，解锁了 GPT plus，没有搞反代，只是配合 copilot 在 codex 里面小额度用一用，目前没有封号危险。
 于是我的配置方案就基于 copilot cli 以及 GPT plus 会员。
 
@@ -37,4 +37,39 @@ cp -r Auto-claude-code-research-in-sleep/skills/* ~/.copilot/skills/
 ```
 
 # 配置 Codex MCP
+
+先在终端中安装 codex cli。
+```bash
+npm install -g @openai/codex
+codex login   # authenticate with your ChatGPT or API key
+```
+这里选择用 OAuth 或者 API 登录都是可以的。
+在 `~/.copilot/mcp-config.json` 中添加如下 mcp：
+```json
+{
+  "mcpServers": {
+    "codex": {
+      "type": "stdio",
+      "command": "codex",
+      "tools": [
+        "*"
+      ],
+      "args": ["mcp-server"],
+	  "timeout":300000,
+      "env": {
+        "HTTP_PROXY": "http://127.0.0.1:7897",
+        "HTTPS_PROXY": "http://127.0.0.1:7897",
+        "ALL_PROXY": "http://127.0.0.1:7897",
+        "http_proxy": "http://127.0.0.1:7897",
+        "https_proxy": "http://127.0.0.1:7897",
+        "all_proxy": "http://127.0.0.1:7897"
+      }
+    },
+```
+如果遇到这种网络错误
+![[Pasted image 20260318165042.png|500]]
+记得在 json 的 `env` 中添加代理。我用的是 clash-verge，按照他给的端口填就行了：
+![[Pasted image 20260318165145.png]]
+配置好之后可以在 copilot 中测试一下
+![[Pasted image 20260318165821.png]]
 
