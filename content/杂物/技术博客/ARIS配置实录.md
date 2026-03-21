@@ -1,6 +1,6 @@
 ---
 title: ARIS配置实录
-description: copilot 取消对 Opus 支持后我自己的第三方 coding plan，以及在此基础上在 copilot 中部署全自动科研工作流 Auto-claude-code-research-in-sleep 的配置
+description: copilot 取消对 Opus 支持后，我自己的第三方 coding plan，以及在此基础上在 copilot 中部署/配置全自动科研工作流 Auto-claude-code-research-in-sleep
 tags:
 aliases:
 date: 2026-03-17T01:20:28
@@ -67,7 +67,7 @@ codex login   # authenticate with your ChatGPT or API key
     },
 ```
 如果遇到这种网络错误
-![[Pasted image 20260318165042.png|500]]
+![[Pasted image 20260318165042.png]]
 记得在 json 的 `env` 中添加代理。我用的是 clash-verge，按照他给的端口填就行了：
 ![[Pasted image 20260318165145.png]]
 配置好之后可以在 copilot 中测试一下
