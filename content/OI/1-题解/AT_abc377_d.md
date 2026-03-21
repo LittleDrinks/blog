@@ -6,7 +6,7 @@ tags:
 aliases:
   - "[ABC377D] Many Segments 2"
 date: 2025-02-11T08:29:59
-publish: false
+publish: true
 ---
 ## [[ABC377D] Many Segments 2]()
 
