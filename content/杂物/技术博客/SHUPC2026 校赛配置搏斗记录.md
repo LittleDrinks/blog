@@ -52,9 +52,25 @@ https://help.luogu.com.cn/rules/academic/problem-standard
 
 # domjudge
 
-## 把题目从 polygon 搬运到 domjudge 上
+## 配置 domjudge
 
-### 转化为 domjudge 可以识别的格式
+使用 docker 部署，直接把[仓库](https://github.com/XY-cpp/domjudge)下载下来然后 `sh init.sh` 即可。
+这里唯一的坑是，这个 initi 脚本会自动设置 judgehost 的密码，但是貌似原来的 `while` 等待并不足以确保服务器生成了 judgehost 的密码，所以这里可以多等一会儿
+```bash
+# ...
+while [[ "$(docker inspect -f '{{.State.Health.Status}}' domserver)" != "healthy" ]]; do
+  sleep 1
+done
+
+# 上面这几行代码貌似并不能保证控制 judgehost 密码的 restapi.secret 已经生成，还需要额外等待
+echo "Waiting longer to ensure password generation"
+sleep 15
+
+password=$(docker exec -it domserver cat /opt/domjudge/domserver/etc/restapi.secret | grep "default" | awk '{print $4}' | tr -d '\r')
+# ...
+```
+
+## 把题目转化为 domjudge 可以识别的格式
 
 在 polygon 上 build full package，然后下载 package
 ![[Pasted image 20260325110505.png]]
@@ -183,7 +199,7 @@ p2d --yes --code h --color "#FF0000" \
     --output "$DOMJUDGE_PACKAGE_DIR/permutation.zip" --auto \
     "./$POLYGON_PACKAGE_DIR/problems/permutation"
 ```
-这里可以给心爱的题目选一个颜色
+这里可以给心爱的题目选一个颜色。如果懒可以全部设成白色，效果也挺好的
 
 |  题目 |      推荐颜色      |    颜色代码   |
 | :-: | :------------: | :-------: |
@@ -198,9 +214,9 @@ p2d --yes --code h --color "#FF0000" \
 |  I  |  ⚪ 白色 (White)  | `#FFFFFF` |
 |  J  |  🟤 棕色 (Brown) | `#8B4513` |
 |  K  |  🔵 青色 (Cyan)  | `#00FFFF` |
+打包完成之后能看到若干个 zip，直接在 domjudge 上上传即可。
 
-
-### pdf 编译问题
+## pdf 编译问题
 
 把 statement.ftl 换成
 ```tex
@@ -263,3 +279,60 @@ $ErrorActionPreference='Stop'; tlmgr --repository https://ftp.math.utah.edu/pub/
 
 遇到了图片无法插入的问题，所以把 `statement/chinese/doall.bat` 中的 `latex` 换成 `pdflatex`。tutorials 没有需求，所以随便改了改不阻塞 doall 就可以了。
 ![[Pasted image 20260325111132.png]]
+
+## 导入名单
+
+拿到了这样一份名单
+![[Pasted image 20260328152824.png]]
+有打星的人，还有出题组的混在里面了，所以弄了一个 `remove_ids`，一行一个学号，和一个 `stars.csv`
+![[Pasted image 20260328153312.png]]
+稍微梳理了一下需求，写了一份 prompt
+```markdown
+输入：
+
+- 考场安排.xlsx，有【序号、学号、姓名、考场】四个信息
+- remove_ids，每行一个学号
+- stars.csv：打星选手名单，有学号、姓名、考场
+
+帮我整理出三份 json，输出到 `outputs/`，格式要求见
+
+- domjudge 文档：https://www.domjudge.org/docs/manual/7.3/index.html
+- 导入文档：https://www.domjudge.org/docs/manual/8.3/import.html
+- `outputs` 文件夹中带 example 的三个文件（去年的版本）
+
+先按照学号将 remove_ids 中的人删掉，这些人是出题组的，不参与比赛
+
+stars.csv 中如果出现了 考场安排.xlsx 中未出现的人，id 直接在 考场安排.xlsx 后追加
+
+注意所有值都应该是字符串而不是数字，这里为了表述方便直接写数字了
+
+# organizations.json
+
+- id：学号
+- name：姓名
+
+# teams.json
+
+- id：和 考场安排.xlsx 相同
+- icpc_id：省略
+- label：考场号+座位号，座位号尚未分配，考场内共48台电脑，程序需要自动分配座位号（删掉的那些人不分配座位号）
+- name：学号
+- display_name：学号
+- group_ids：
+    - 如果出现在 remove_ids，直接删掉
+    - 如果出现在 stars.csv 中，设为 4，表示打星 Observers
+    - 否则设为 3，表示正式参赛 Participants
+- organization_id：设为学号
+
+# accounts.json
+
+- id：同 teams.json
+- username：学号
+- password：随机生成强密码
+- team_id：和 id 一样，对应 teams.json 中的这个人
+- type：设为 "team"
+```
+弄好之后直接丢给 AI 处理即可，然后在 domjudge 主页面上找到 Import，使用 json 导入即可
+![[Pasted image 20260328153640.png|400]]
+![[Pasted image 20260328153711.png|400]]
+过程中遇到了很多坑，都是规范没定义好的问题
