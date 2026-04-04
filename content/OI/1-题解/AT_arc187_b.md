@@ -1,18 +1,11 @@
 ---
-title: "AT_arc187_b"
+title: AT_arc187_b
 description: ""
 tags:
-  []
-aliases:
-  []
+  - OI/题解
+aliases: []
 date: 2025-02-11T08:29:59
 publish: true
----
----
-tags:
-  - 题解
-aliases:
-  - "[ARC187B] Sum of CC"
 ---
 ## [[ARC187B] Sum of CC](https://www.luogu.com.cn/problem/AT_arc187_b)
 
@@ -34,7 +27,7 @@ $$
 \sum_{i=1}^n\sum_{j=2}^m f(i,j)\times(g(i+1,j-1)-g(i+1,j-2))
 $$
 
-#### [AC代码](https://www.luogu.com.cn/record/190288884)
+[***AC代码***](https://www.luogu.com.cn/record/190288884)
 
 ```cpp
 #include <bits/stdc++.h>
