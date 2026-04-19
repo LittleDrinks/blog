@@ -1,0 +1,19 @@
+---
+title: "IR"
+description: ""
+tags:
+  - CS/计组
+aliases:
+  - 指令寄存器
+  - Instruction Register
+date: 2026-04-19T00:00:00
+publish: true
+---
+
+指令寄存器（Instruction Register），存放当前正在执行的指令
+
+执行期间内容不允许变化，保证指令完整执行
+
+属于控制器，对用户透明（程序员不可见）
+
+[[CPU功能与组成]] [[指令周期与微操作]]
