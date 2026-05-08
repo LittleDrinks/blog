@@ -9,3 +9,4 @@ publish: true
 ---
 解决 CPU 和主存之间速度不匹配的问题
 一般由 [[SRAM]] 构成
+cache 命中率
