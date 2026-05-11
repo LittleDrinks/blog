@@ -1,14 +1,14 @@
 @use "./base.scss";
 
-// // 调整正文行间距
-// article p,
-// article li,
-// article ol,
-// article ul {
-//     line-height: 1.8;
-// }
+// 对应 Obsidian "段落行高" = 1.7
+article p,
+article li,
+article ol,
+article ul {
+    line-height: 1.5;
+}
 
-// 如果需要调整段间距（段与段之间的空隙）
+// 对应 Obsidian "段落间距" = 1em
 article p {
-    margin-bottom: 1.2em;
+    margin-bottom: 1.4em;
 }
