@@ -1,14 +1,26 @@
 @use "./base.scss";
 
-// 对应 Obsidian "段落行高" = 1.7
+/* ========== 华康手札体（WOFF2） ========== */
+@font-face {
+  font-family: "HuakangShouzha";
+  src: url("/static/fonts/huakang.woff2") format("woff2");
+  font-display: swap;
+  font-weight: normal;
+}
+
+/* 覆盖正文字体 */
+body {
+  font-family: "HuakangShouzha", "PingFang SC", "Microsoft YaHei", sans-serif !important;
+}
+
+/* ========== 段落排版（对应 Obsidian 配置） ========== */
 article p,
 article li,
 article ol,
 article ul {
-    line-height: 1.5;
+  line-height: 1.7;
 }
 
-// 对应 Obsidian "段落间距" = 1em
 article p {
-    margin-bottom: 2em;
+  margin-bottom: 1em;
 }
