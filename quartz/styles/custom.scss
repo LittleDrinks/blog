@@ -1,3 +1,14 @@
 @use "./base.scss";
 
-// put your custom CSS here!
+// 调整正文行间距
+article p,
+article li,
+article ol,
+article ul {
+    line-height: 1.8;
+}
+
+// 如果需要调整段间距（段与段之间的空隙）
+article p {
+    margin-bottom: 1.2em;
+}
