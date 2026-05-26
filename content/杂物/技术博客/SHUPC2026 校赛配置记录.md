@@ -1,0 +1,364 @@
+---
+title: SHUPC2026 校赛配置记录
+description: 使用 polygon 出题，domjudge 配置比赛
+tags:
+aliases:
+date: 2026-03-23T14:49:35
+publish: true
+---
+# polygon
+
+## 题面中一些常见的术语解释
+
+```latex
+\documentclass{article}
+\begin{document}
+
+这是一个带脚注的句子\footnote{这是脚注的具体内容。}，继续正文。
+
+\textasteriskcentered  % 居中的 *
+\textdagger             % †
+\textdaggerdbl          % ‡
+\textsection            % §
+\textparagraph          % ¶
+\textbardbl             % ‖ (文本模式双竖线)
+\textpilcrow            % ¶ 变体
+\textreferencemark      % ※
+\textinterrobang        % ‽
+\star                   % ★ (数学模式)
+\bigstar                % ★ (需 amssymb 宏包)
+
+\footnote[1]{强制星号}      % 对应 \ast
+\footnote[2]{强制匕首号}    % 对应 \dagger
+\footnote[6]{强制双竖线}    % 对应 \|
+
+\end{document}
+```
+
+[Why do we use the word "permutation" like this?](https://codeforces.com/blog/entry/116986)
+https://help.luogu.com.cn/rules/academic/problem-standard
+- 排列 permutation 
+	- A **permutation** of length n is an array consisting of n distinct integers from 1 to n in arbitrary order.
+	- “A **permutation** of length n is a sequence in which each integer from 1 to n appears exactly once.”
+	- [CF2193B](https://codeforces.com/problemset/problem/2193/B)
+- 子序列 subsequence
+	- A **subsequence** is a string that can be derived from another string by deleting some or no symbols without changing the order of the remaining symbols. Characters to be deleted are not required to go successively, there can be any gaps between them. For example, for the string "abaca" the following strings are subsequences: "abaca", "aba", "aaa", "a" and "" (empty string). But the following strings are not subsequences: "aabaca", "cb" and "bcaa".
+	- A **subsequence** is a sequence that can be obtained by deleting some elements (possibly zero) without changing the order of the remaining elements.
+	- [CF1370D](https://codeforces.com/problemset/problem/1370/D)
+- 子段 subsegment/subarray
+	- A **subsegment** of a permutation is a contiguous subsequence of that permutation. For example, the permutation $[2,1,4,3]$ has 10 subsegments: $[2], [2,1], [2,1,4], [2,1,4,3], [1], [1,4], [1,4,3], [4], [4,3]$ and $[3]$.
+	- [CF1743B](https://codeforces.com/problemset/problem/1743/B)
+
+
+# DOMjudge
+
+## 配置 DOMjudge
+
+使用 docker 部署，直接把[仓库](https://github.com/XY-cpp/domjudge)下载下来然后 `sh init.sh` 即可。
+别的文件夹中或许会存在单独的 `judgehost` 文件，这是为了方便在别的地方部署测评机，一般不需要 judgehost 文件夹。
+![[Pasted image 20260329001853.png]]
+这里唯一的坑是，可能会遇到 judgehost 一直尝试重启最后断线的问题。
+原因是这个 init 脚本会在服务器启动后自动设置 judgehost 的密码，但是原来的 `while` 等待并不足以确保服务器已经生成了 judgehost 的密码，会在 `judgehost.secret` 中写入空密码。
+解决方法是直接在这里多等一会儿
+```bash
+# ...
+while [[ "$(docker inspect -f '{{.State.Health.Status}}' domserver)" != "healthy" ]]; do
+  sleep 1
+done
+
+# 上面这几行代码貌似并不能保证控制 judgehost 密码的 restapi.secret 已经生成，还需要额外等待
+echo "Waiting longer to ensure password generation"
+sleep 15
+
+password=$(docker exec -it domserver cat /opt/domjudge/domserver/etc/restapi.secret | grep "default" | awk '{print $4}' | tr -d '\r')
+# ...
+```
+
+## 把题目转化为 DOMjudge 可以识别的格式
+
+在 polygon 上 build full package，然后下载 package
+![[Pasted image 20260325110505.png]]
+由于我 wsl 中 wine 一直报错，所以我选择先在 windows 环境下使用 `doall.bat` 跑一遍 gen、val 和 std 生成数据和答案，再用脚本清理 `problems\*\tests\` 中文件 `\r\n` 换行。
+这里让 ai 写脚本的时候要注意，不能只让他把 `\r\n` 换成 `\n`，要让他把换行方式从 CRLF 变成 LF
+```powershell
+# Convert line endings from CRLF to LF for all files in SHUPC2026\problems\*\tests\
+
+param(
+    [switch]$RepairLiteralBackslashN
+)
+
+$testDirs = Get-ChildItem -Path "SHUPC2026\problems\*\tests" -Directory
+$convertedCount = 0
+$repairedCount = 0
+
+foreach ($dir in $testDirs) {
+    $files = Get-ChildItem -Path $dir.FullName -File -Recurse
+    foreach ($file in $files) {
+        $bytes = [System.IO.File]::ReadAllBytes($file.FullName)
+
+        $hasLf = $false
+        $hasLiteralBackslashN = $false
+        for ($j = 0; $j -lt $bytes.Length; $j++) {
+            if ($bytes[$j] -eq 10) {
+                $hasLf = $true
+            }
+            if ($j + 1 -lt $bytes.Length -and $bytes[$j] -eq 92 -and $bytes[$j + 1] -eq 110) {
+                $hasLiteralBackslashN = $true
+            }
+        }
+
+        # Only repair literal \n when file has no real LF at all.
+        $repairThisFile = $RepairLiteralBackslashN -and (-not $hasLf) -and $hasLiteralBackslashN
+
+        $buffer = [System.Collections.Generic.List[byte]]::new($bytes.Length)
+        $changed = $false
+        $repaired = $false
+
+        for ($i = 0; $i -lt $bytes.Length; $i++) {
+            if ($bytes[$i] -eq 13 -and $i + 1 -lt $bytes.Length -and $bytes[$i + 1] -eq 10) {
+                # Skip CR in CRLF so CRLF becomes LF.
+                $changed = $true
+                continue
+            }
+
+            if ($repairThisFile -and $bytes[$i] -eq 92 -and $i + 1 -lt $bytes.Length -and $bytes[$i + 1] -eq 110) {
+                $buffer.Add(10)
+                $changed = $true
+                $repaired = $true
+                $i++
+                continue
+            }
+
+            $buffer.Add($bytes[$i])
+        }
+
+        if ($changed) {
+            [System.IO.File]::WriteAllBytes($file.FullName, $buffer.ToArray())
+            Write-Host "Converted: $($file.FullName)"
+            $convertedCount++
+            if ($repaired) {
+                $repairedCount++
+            }
+        }
+    }
+}
+
+Write-Host "Done! Converted $convertedCount files."
+if ($RepairLiteralBackslashN) {
+    Write-Host "Repaired literal \\n in $repairedCount files."
+}
+```
+保存为 `convert_line_endings.ps1` 运行即可。
+然后使用 csl 的 [p2d](https://github.com/cn-xcpc-tools/Polygon2DOMjudge) 工具打包题目
+```
+p2d-contest .\contest.xml > convert.sh
+```
+切换到 wsl 目录下，在 `convert.sh` 中修改。
+这里不知道为什么一直让我提供 `problem.xml`，讲道理是运行 `p2d` 之后才会有。
+其实直接 `p2d 文件夹` 就可以用了。所以我直接把 `convert.sh` 改掉了。
+```bash
+#!/bin/bash
+# Generated by p2d-contest
+set -eo pipefail
+POLYGON_PACKAGE_DIR=SHUPC2026      # change this to the polygon package directory
+DOMJUDGE_PACKAGE_DIR=domjudge    # change this to the domjudge package directory
+
+# Problem a: manga (change the color if needed)
+echo "$DOMJUDGE_PACKAGE_DIR/problems/manga/"
+p2d --yes --code A --color "#FF0000" \
+    --output "$DOMJUDGE_PACKAGE_DIR/manga.zip" --auto \
+    "./$POLYGON_PACKAGE_DIR/problems/manga/"
+
+# Problem b: gold (change the color if needed)
+p2d --yes --code B --color "#FF0000" \
+    --output "$DOMJUDGE_PACKAGE_DIR/gold.zip" --auto \
+    "./$POLYGON_PACKAGE_DIR/problems/gold"
+
+# Problem c: shushus-armor (change the color if needed)
+p2d --yes --code C --color "#FF0000" \
+    --output "$DOMJUDGE_PACKAGE_DIR/shushus-armor.zip" --auto \
+    "./$POLYGON_PACKAGE_DIR/problems/shushus-armor"
+
+# Problem d: da-tie-guan (change the color if needed)
+p2d --yes --code D --color "#FF0000" \
+    --output "$DOMJUDGE_PACKAGE_DIR/da-tie-guan.zip" --auto \
+    "./$POLYGON_PACKAGE_DIR/problems/da-tie-guan"
+
+# Problem e: yixutaer-exploror (change the color if needed)
+p2d --yes --code E --color "#FF0000" \
+    --output "$DOMJUDGE_PACKAGE_DIR/yixutaer-exploror.zip" --auto \
+    "./$POLYGON_PACKAGE_DIR/problems/yixutaer-exploror"
+
+# Problem f: cascading-down-the-tree (change the color if needed)
+p2d --yes --code F --color "#FF0000" \
+    --output "$DOMJUDGE_PACKAGE_DIR/cascading-down-the-tree.zip" --auto \
+    "./$POLYGON_PACKAGE_DIR/problems/cascading-down-the-tree"
+
+# Problem g: translation (change the color if needed)
+p2d --yes --code G --color "#FF0000" \
+    --output "$DOMJUDGE_PACKAGE_DIR/translation.zip" --auto \
+    "./$POLYGON_PACKAGE_DIR/problems/translation"
+
+# Problem h: permutation (change the color if needed)
+p2d --yes --code H --color "#FF0000" \
+    --output "$DOMJUDGE_PACKAGE_DIR/permutation.zip" --auto \
+    "./$POLYGON_PACKAGE_DIR/problems/permutation"
+```
+`--code` 是显示在榜上的题目缩写，设置为题号字母，比如 `--code A`。
+`--color` 可以给心爱的题目选一个颜色。如果懒可以全部设成白色，效果也挺好的
+
+|  题目 |      推荐颜色      |    颜色代码   |
+| :-: | :------------: | :-------: |
+|  A  |   🔴 红色 (Red)  | `#FF0000` |
+|  B  |  🟢 绿色 (Green) | `#00FF00` |
+|  C  |  🔵 蓝色 (Blue)  | `#0000FF` |
+|  D  | 🟡 黄色 (Yellow) | `#FFFF00` |
+|  E  | 🟣 紫色 (Purple) | `#800080` |
+|  F  | 🟠 橙色 (Orange) | `#FFA500` |
+|  G  |  🩷 粉色 (Pink)  | `#FFC0CB` |
+|  H  |  ⚫ 黑色 (Black)  | `#000000` |
+|  I  |  ⚪ 白色 (White)  | `#FFFFFF` |
+|  J  |  🟤 棕色 (Brown) | `#8B4513` |
+|  K  |  🔵 青色 (Cyan)  | `#00FFFF` |
+
+## 把题目上传到 DOMjudge
+
+先在 users 中找到 admin
+![[Pasted image 20260329000632.png]]
+进入编辑，选择加入 DOMjudge 这个 team
+![[Pasted image 20260329000731.png]] 
+这样上传 package 时会自动测试 std。
+上一步打包完成之后能看到若干个 zip，直接在 problems 中上传即可。
+![[Pasted image 20260329001020.png]]
+![[Pasted image 20260329001048.png]]
+样例多的、标程多的题目，上传会比较费时间。不要误以为服务器卡死了。
+上传完成后可以进入题目编辑界面上传题面，polygon 下载 package 时会自动编译题面，存放在 `<problem>/statements/.pdf/chinese/problem.pdf`
+![[Pasted image 20260329001149.png]]
+最后在 contest 中上传整合版题面
+![[Pasted image 20260329001453.png]]
+
+## pdf 编译问题
+
+把 statement.ftl 换成
+```tex
+\documentclass [11pt, a4paper, oneside] {article}
+\usepackage {CJK}
+\usepackage [T2A] {fontenc}
+\usepackage [utf8] {inputenc}
+\usepackage [english, russian] {babel}
+\usepackage {amsmath}
+\usepackage {amssymb}
+\usepackage <#if contest.language?? && contest.language="russian">[russian]<#elseif contest.language?? && contest.language="ukrainian">[ukrainian]</#if>{olymp}
+\usepackage {comment}
+\usepackage {epigraph}
+\usepackage {expdlist}
+\usepackage {graphicx}
+\usepackage {ulem}
+\usepackage {import}
+\usepackage{ifpdf}
+\ifpdf
+  \DeclareGraphicsRule{*}{mps}{*}{}
+\fi
+ 
+\begin {document}
+\begin{CJK}{UTF8}{gbsn}
+\contest
+{${contest.name!}}%
+{${contest.location!}}%
+{${contest.date!}}%
+ 
+\binoppenalty=10000
+\relpenalty=10000
+ 
+\renewcommand{\t}{\texttt}
+ 
+<#if shortProblemTitle?? && shortProblemTitle>
+  \def\ShortProblemTitle{}
+</#if>
+ 
+<#list statements as statement>
+<#if statement.path??>
+\graphicspath{{${statement.path}}}
+<#if statement.index??>
+  \def\ProblemIndex{${statement.index}}
+</#if>
+\import{${statement.path}}{./${statement.file}}
+<#else>
+\input ${statement.file}
+</#if>
+</#list>
+\end{CJK}
+\end {document}
+
+```
+
+因为懒得改模板，所以我选择直接安装俄文依赖
+
+```bash
+$ErrorActionPreference='Stop'; tlmgr --repository https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2024/tlnet-final install lh babel-russian collection-langcyrillic
+```
+
+遇到了图片无法插入的问题，所以把 `statement/chinese/doall.bat` 中的 `latex` 换成 `pdflatex`。tutorials 没有需求，所以随便改了改不阻塞 doall 就可以了。
+![[Pasted image 20260325111132.png]]
+
+## 导入名单
+
+拿到了这样一份名单
+![[Pasted image 20260328152824.png]]
+有打星的人，还有出题组的混在里面了，所以弄了一个 `remove_ids`，一行一个学号，和一个 `stars.csv`
+![[Pasted image 20260328153312.png]]
+稍微梳理了一下需求，写了一份 prompt
+```markdown
+输入：
+
+- 考场安排.xlsx，有【序号、学号、姓名、考场】四个信息
+- remove_ids，每行一个学号
+- stars.csv：打星选手名单，有学号、姓名、考场
+
+帮我整理出三份 json，输出到 `outputs/`，格式要求见
+
+- domjudge 文档：https://www.domjudge.org/docs/manual/7.3/index.html
+- 导入文档：https://www.domjudge.org/docs/manual/8.3/import.html
+- `outputs` 文件夹中带 example 的三个文件（去年的版本）
+
+先按照学号将 remove_ids 中的人删掉，这些人是出题组的，不参与比赛
+
+stars.csv 中如果出现了 考场安排.xlsx 中未出现的人，id 直接在 考场安排.xlsx 后追加
+
+注意所有值都应该是字符串而不是数字，这里为了表述方便直接写数字了
+
+# organizations.json
+
+- id：学号
+- name：姓名
+
+# teams.json
+
+- id：和 考场安排.xlsx 相同
+- icpc_id：省略
+- label：考场号+座位号，座位号尚未分配，考场内共48台电脑，程序需要自动分配座位号（删掉的那些人不分配座位号）
+- name：学号
+- display_name：学号
+- group_ids：
+    - 如果出现在 remove_ids，直接删掉
+    - 如果出现在 stars.csv 中，设为 4，表示打星 Observers
+    - 否则设为 3，表示正式参赛 Participants
+- organization_id：设为学号
+
+# accounts.json
+
+- id：同 teams.json
+- username：学号
+- password：随机生成强密码
+- team_id：和 id 一样，对应 teams.json 中的这个人
+- type：设为 "team"
+```
+弄好之后直接丢给 AI 处理即可，然后在 DOMjudge 主页面上找到 Import，使用 json 导入即可
+![[Pasted image 20260328153640.png|400]]
+![[Pasted image 20260328153711.png|400]]
+过程中遇到了很多坑，都是规范没定义好的问题
+之后还可以让 ai 分考场整理密码条。这里一个需要注意的地方是密码尽量不要混用 `1,I,L,0,o`，容易看不清。或者打印的时候选一个好一点的字体也是可以的。
+最后在 contests 中打开 medal 选项，设置金银铜线
+![[Pasted image 20260329001539.png]]
+
+![[Pasted image 20260329001556.png|400]]
