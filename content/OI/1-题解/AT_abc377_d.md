@@ -8,7 +8,7 @@ aliases:
 date: 2025-02-11T08:29:59
 publish: true
 ---
-## [[ABC377D] Many Segments 2]()
+## [[ABC377D] Many Segments 2](https://atcoder.jp/contests/abc377/tasks/abc377_d)
 
 一共只有 $M\leq2\times10^5$ 个可能的右端点。对于每个右端点 $r$，将所有 $R_i<r$ 的 $i$ 存入 $S$，这就是可能覆盖的所有区间。如果不想覆盖这些区间中的任意一个，则左端点必须满足
 $$
