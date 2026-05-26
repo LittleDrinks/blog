@@ -12,6 +12,7 @@ configuration:
     - private
     - templates
     - .obsidian
+    - 0-模板
   theme:
     fontOrigin: googleFonts
     cdnCaching: true
@@ -98,7 +99,7 @@ plugins:
   - source: github:quartz-community/remove-draft
     enabled: true
   - source: github:quartz-community/explicit-publish
-    enabled: false
+    enabled: true
   - source: github:quartz-community/alias-redirects
     enabled: true
   - source: github:quartz-community/content-index
