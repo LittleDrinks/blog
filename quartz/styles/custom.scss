@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: "华康手札体-lfzbbaa";
-  src: url("/static/fonts/huakang.woff2") format("woff2");
+  src: url("./static/fonts/huakang.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -17,7 +17,7 @@ article {
     font-family: "华康手札体-lfzbbaa", var(--bodyFont);
     line-height: 2;
   }
-  
+
   p a,
   li a,
   blockquote a {
