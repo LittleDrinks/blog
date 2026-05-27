@@ -13,10 +13,15 @@ article {
   li,
   td,
   th,
-  blockquote,
-  a {
+  blockquote {
     font-family: "华康手札体-lfzbbaa", var(--bodyFont);
     line-height: 2;
+  }
+  
+  p a,
+  li a,
+  blockquote a {
+    font-family: "华康手札体-lfzbbaa", var(--bodyFont);
   }
 
   code,
