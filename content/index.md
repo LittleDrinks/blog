@@ -10,7 +10,7 @@ aliases:
 date: 2026-03-13T00:16:05
 publish: true
 ---
-这是我的网络笔记库，使用 [Quartz 4](https://quartz.zituoguan.com/) 搭建。
+这是我的网络笔记库，使用 [Quartz 5](https://quartz.jzhao.xyz/) 搭建。
 
 该笔记库中主要分享：
 
