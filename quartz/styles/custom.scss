@@ -1,3 +1,36 @@
-@use "./variables.scss" as *;
+@use "./base.scss";
 
-// put your custom CSS here!
+@font-face {
+  font-family: "华康手札体-lfzbbaa";
+  src: url("/static/fonts/huakang.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+article {
+  p,
+  li,
+  td,
+  th,
+  blockquote,
+  a {
+    font-family: "华康手札体-lfzbbaa", var(--bodyFont);
+    line-height: 2;
+  }
+
+  code,
+  pre,
+  pre > code,
+  figure[data-rehype-pretty-code-figure],
+  figure[data-rehype-pretty-code-figure] > [data-rehype-pretty-code-title] {
+    font-family: var(--codeFont) !important;
+  }
+
+  p > code,
+  li > code,
+  td > code,
+  a > code {
+    font-family: var(--codeFont) !important;
+  }
+}
