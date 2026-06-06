@@ -195,5 +195,5 @@ triage → todo → ready → running → done
 1. Kanban 官方文档：https://hermes-agent.nousresearch.com/docs/user-guide/features/kanban
 2. Subagent Delegation 文档：https://hermes-agent.nousresearch.com/docs/user-guide/features/delegation
 3. Cron 文档：https://github.com/NousResearch/hermes-agent/blob/main/website/docs/user-guide/features/cron.md
-4. 多 Agent 架构 Issue #344：https://github.com/NousResearch/hermes-agent/issues/344
-5. Agent-to-Agent 消息 Issue #25176：https://github.com/NousResearch/hermes-agent/issues/25176
+4. 多 Agent 架构 Issue #344 ：https://github.com/NousResearch/hermes-agent/issues/344
+5. Agent-to-Agent 消息 Issue #25176 ：https://github.com/NousResearch/hermes-agent/issues/25176
