@@ -11,3 +11,4 @@ publish: true
 
 - [[QOJ18474|H]]
 - [[QOJ18478|L]]
+- [[QOJ18472|F]]
