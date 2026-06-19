@@ -10,3 +10,4 @@ publish: true
 # [The 2026 Jiangsu Collegiate Programming Contest](https://qoj.ac/contest/3756)
 
 - [[QOJ17477|L]]
+- [[QOJ17469|D]]
