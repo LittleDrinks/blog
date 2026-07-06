@@ -7,7 +7,8 @@ aliases:
 date: 2026-06-25T14:44:14
 publish: true
 ---
-基本单位张量 `torch.tensor`
+# 张量
+基本单位，`torch.tensor`
 ```python
 import torch
 import torch.nn.functional as F
@@ -87,7 +88,10 @@ x[mask]                    # 布尔索引: [4., 5.]
 indices = torch.tensor([0, 2, 4])
 x[indices]                 # 按索引取: [1., 3., 5.]
 ```
-模型训练流程：前向传播、算误差、反向传播（以线性回归模型为例）
+
+# 模型训练流程
+前向传播、算误差、反向传播
+以线性回归模型为例：
 ```python
 import torch
 import torch.nn as nn
@@ -109,6 +113,9 @@ for epoch in range(epochs):
 	loss.backward()
 	optimizer.step()
 ```
+
+# 自定义模型
+## 基类
 model 可以通过继承 `nn.Module` 自定义，至少需要重载 `__init__()` 和 `forward()`
 ```python
 class LinearRegressionModel(nn.Module):
@@ -120,6 +127,34 @@ class LinearRegressionModel(nn.Module):
 
 model = LinearRegressionModel()
 ```
+可以通过 `nn.Parameter()` 将矩阵声明为参数，自动处理反向传播（可以参考手写版本的 [[RNN]]）
+## 激活函数
+直接嵌套两层线性层无意义，中间加一个激活函数可以用于拟合非线性函数
+`torch.nn` 和 `torch.nn.functional` 中提供了若干激活函数，比如 `relu`。
+这里的区别是：`nn` 将其视为神经网络的一层，`nn.functional` 提供纯函数。
+部分函数，比如 `nn.functional.tanh()` 已被弃用，建议使用 `torch.tanh()`。
+注意像 `Linear` 这种有可学习参数的必须使用 `nn.Linear`。
+也可以在自定义的 `nn.Module` 中手写一个成员函数作为激活函数。
+## 损失函数
+可以通过继承 `nn.Module` 自定义损失函数
+```python
+class HuberLoss(nn.Module):
+    def __init__(self, delta=1.0):
+        super().__init__()
+        self.delta = delta
+
+    def forward(self, pred, targ):
+        err = torch.abs(pred - targ)
+        L1 = self.delta * (err - 0.5 * self.delta)
+        L2 = 0.5 * err ** 2
+        loss = torch.where(err <= self.delta, L2, L1)
+        return loss.mean()
+
+criterion = HuberLoss()
+```
+
+# 加载数据
+
 可以自定义 dataset 和 dataloader，实现加载数据、分 batch 计算
 ```python
 from torch.utils.data import Dataset, TensorDataset, DataLoader
@@ -152,27 +187,18 @@ dataloader = DataLoader(dataset, batch_size=32, shuffle=True)
 for batch_X, batch_Y in dataloader:
 	print(batch_X.shape, batch_Y.shape)
 ```
-直接嵌套两层线性层无意义，中间加一个激活函数可以用于拟合非线性函数
-`torch.nn` 和 `torch.nn.functional` 中提供了若干激活函数，比如 `relu`，`nn` 将其视为神经网络的一层，`nn.functional` 提供纯函数。注意像 `Linear` 这种有可学习参数的必须使用 `nn.Linear`
-也可以在自定义的 `nn.Module` 中手写一个成员函数作为激活函数
 
-可以通过继承 `nn.Module` 自定义损失函数
+# 模型的保存与加载
 ```python
-class HuberLoss(nn.Module):
-    def __init__(self, delta=1.0):
-        super().__init__()
-        self.delta = delta
+# Save the model to a file named "model.pth"
+torch.save(model.state_dict(), 'model.pth')
 
-    def forward(self, pred, targ):
-        err = torch.abs(pred - targ)
-        L1 = self.delta * (err - 0.5 * self.delta)
-        L2 = 0.5 * err ** 2
-        loss = torch.where(err <= self.delta, L2, L1)
-        return loss.mean()
-
-criterion = HuberLoss()
+# Load the model back from "model.pth"
+loaded_model = SimpleModel()
+loaded_model.load_state_dict(torch.load('model.pth'))
 ```
 
+# tensorboard
 tensorboard 可视化 loss 曲线
 ```python
 from torch.utils.tensorboard import SummaryWriter
@@ -184,12 +210,3 @@ for epoch in range(epochs):
 writer.close()
 ```
 
-模型的保存与加载
-```python
-# Save the model to a file named "model.pth"
-torch.save(model.state_dict(), 'model.pth')
-
-# Load the model back from "model.pth"
-loaded_model = SimpleModel()
-loaded_model.load_state_dict(torch.load('model.pth'))
-```
