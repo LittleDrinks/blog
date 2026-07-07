@@ -209,4 +209,3 @@ for epoch in range(epochs):
 	writer.add_scalar('loss/train', loss.item(), epoch)
 writer.close()
 ```
-
