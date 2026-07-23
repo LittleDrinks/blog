@@ -6,7 +6,7 @@ aliases:
 date: 2026-07-15T00:26:03
 publish: true
 ---
-可以使用学校提供的 kms 激活 visio
+可以使用 SHU 提供的 kms 激活 visio
 
 > [!note]- Visio 2019 安装与激活
 > 
