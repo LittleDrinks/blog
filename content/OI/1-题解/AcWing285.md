@@ -1,22 +1,15 @@
 ---
-title: "AcWing285"
+title: AcWing285
 description: ""
 tags:
-  []
-aliases:
-  []
-date: 2025-02-11T08:29:59
-publish: true
----
----
-tags:
-  - 题解
-  - DP
-  - DP/树形DP
+  - OI/题解
+  - OI/DP/树形DP
 aliases:
   - AcWing285. 没有上司的舞会
   - P1352 没有上司的舞会
-speed:
+  - 没有上司的舞会
+date: 2025-02-11T08:29:59
+publish: true
 ---
 ## [285. 没有上司的舞会](https://www.acwing.com/problem/content/287/)
 
@@ -28,7 +21,7 @@ f(u,1)=\sum_{v\in son[u]} f(v,0)
 \end{cases}
 $$
 
-#### [AC代码](https://www.acwing.com/problem/content/submission/code_detail/37381372/)
+[***AC代码***](https://www.acwing.com/problem/content/submission/code_detail/37381372/)
 
 ```cpp
 #include <bits/stdc++.h>
