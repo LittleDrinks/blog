@@ -13,6 +13,8 @@ configuration:
     - templates
     - .obsidian
     - 0-模板
+    - 草稿
+    - 草稿/**
   theme:
     fontOrigin: googleFonts
     cdnCaching: true
